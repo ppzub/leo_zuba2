@@ -5,6 +5,8 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import PostCreate from './posts/Create'
+import PostEdit from './posts/Edit'
 
 // Routes
 const routes = [
@@ -37,6 +39,22 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/posts/create',
+    name: 'postcreate',
+    component: PostCreate,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/posts/edit/:id',
+    name: 'postedit',
+    component: PostEdit,
     meta: {
       auth: true
     }

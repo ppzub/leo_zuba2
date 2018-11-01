@@ -24,3 +24,6 @@ Route::prefix('auth')->group(function () {
     });
 });
 
+Route::namespace('Admin')->middleware('auth:api')->group(function() {
+        Route::resource('posts', 'PostsController')->except(['edit', 'create']);;
+    });

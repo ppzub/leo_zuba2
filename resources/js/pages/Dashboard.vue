@@ -4,7 +4,10 @@
             <div class="card-header">Dashboard</div>
 
             <div class="card-body">
-                Bienvenue
+
+                <router-link  :to="{ name : 'postcreate' }">
+                    Create new post
+                </router-link>
             </div>
         </div>
     </div>
