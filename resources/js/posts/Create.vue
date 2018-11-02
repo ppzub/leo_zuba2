@@ -7,7 +7,7 @@
             <div class="card-header">Let's create new post</div>
 
             <div class="card-body">
-              <form v-on:submit="saveForm()">
+              <form @submit.prevent="saveForm()">
                     <div class="row">
                         <div class="col-xs-12 form-group">
                             <label class="control-label">Title</label>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <button class="btn btn-success">Create</button>
+                            <button type="submit" class="btn btn-success">Create</button>
                         </div>
                     </div>
                 </form>
@@ -48,7 +48,7 @@
 
     export default {
 
-        data: function () {
+        data() {
             return {
                 post: {
                     title: '',
@@ -61,12 +61,10 @@
         },
         methods: {
             saveForm() {
-
-                var qs = require('qs'); //нове
                 var app = this;
                 var newPost = app.post;
 
-                axios.post('/api/posts', qs.stringify(newPost))
+                axios.post('/posts', newPost)
                     .then(function (resp) {
                         app.$router.push({name: 'dashboard'});
                     })
