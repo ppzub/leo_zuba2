@@ -19,6 +19,7 @@ Vue.use(VueRouter)
 // Set Vue authentication
 Vue.use(VueAxios, axios)
 axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded' //нове
 Vue.use(VueAuth, auth)
 
 // Load Index

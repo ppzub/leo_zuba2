@@ -16,15 +16,8 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment');
     }
-    public function galleries()
+    public function likes()
     {
-        return $this->hasMany('App\Gallery');
-    }
-    public function tags()
-    {
-    	return $this->belongsToMany(
-    		'App\Tag',
-    		'post_tag'
-    	);
+        return $this->belongsToMany( 'App\User', 'users_posts_likes', 'post_id', 'user_id');
     }
 }

@@ -14,16 +14,16 @@ use Illuminate\Http\Request;
 */
 
 Route::prefix('auth')->group(function () {
-    Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login');
-    Route::get('refresh', 'AuthController@refresh');
+    Route::post('/register', 'AuthController@register');
+    Route::post('/login', 'AuthController@login');
+    Route::get('/refresh', 'AuthController@refresh');
 
     Route::group(['middleware' => 'auth:api'], function(){
-        Route::get('user', 'AuthController@user');
-        Route::post('logout', 'AuthController@logout');
+        Route::get('/user', 'AuthController@user');
+        Route::post('/logout', 'AuthController@logout');
     });
 });
 
-Route::namespace('Admin')->middleware('auth:api')->group(function() {
-        Route::resource('posts', 'PostsController')->except(['edit', 'create']);;
-    });
+Route::apiResource('/posts', 'Api\PostsController');
+Route::post('/posts/{id}/like', 'Api\PostsController@makeLike');
+Route::delete('/posts/{id}/like', 'Api\PostsController@deleteLike');

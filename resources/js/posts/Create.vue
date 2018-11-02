@@ -45,12 +45,15 @@
 </template>
 
 <script>
+
     export default {
+
         data: function () {
             return {
                 post: {
                     title: '',
                     content: '',
+                    user_id: this.$auth.user().id,
                     image: '',
                     video: '',
                 }
@@ -58,12 +61,14 @@
         },
         methods: {
             saveForm() {
-                event.preventDefault();
+
+                var qs = require('qs'); //нове
                 var app = this;
                 var newPost = app.post;
-                axios.post('/api/posts', newPost)
+
+                axios.post('/api/posts', qs.stringify(newPost))
                     .then(function (resp) {
-                        app.$router.push({name: 'dashboard'})
+                        app.$router.push({name: 'dashboard'});
                     })
                     .catch(function (resp) {
                         console.log(resp);
@@ -72,4 +77,6 @@
             }
         }
     }
+
+
 </script>

@@ -89,4 +89,23 @@ class PostsController extends Controller
         $post->delete();
         return '';
     }
+    public function makeLike( $postId )
+    {
+        $post = Post::findOrFail($postId);
+
+        if( !$post->likes->contains(Auth::user()->id)) {
+            $post->likes()->attach(Auth::user()->id, [
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s')
+          ]);
+        }
+
+        return response()->json( ['post_liked' => true], 201 );
+    }
+    public function deleteLike( $postId )
+    {
+        $post = Post::findOrFail($postId);
+        $post->likes()->detach(Auth::user()->id);
+        return response(null, 204);
+    }
 }
