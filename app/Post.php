@@ -7,11 +7,9 @@ use Jenssegers\Date\Date;
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
-use App\Traits\Youtube;
 
 class Post extends Model
 {
-    use Youtube;
 
 	protected $fillable = ['title', 'content', 'user_id', 'image', 'video', 'created_at', 'updated_at'];
 
@@ -57,16 +55,6 @@ class Post extends Model
             Storage::delete('/images/medium/'.$image->medium);
             Storage::delete('/images/large/'.$image->large);
         }
-    }
-    public function getVideoData()
-    {
-        $this->video = $this->YoutubeID($this->video);
-        $post_video_data = array();
-        $post_video_data['id'] = $this->video;
-        $post_video_data['thumb'] = 'http://img.youtube.com/vi/'.$this->video.'/0.jpg';
-        $post_video_data['title'] = $this->youtube_title($this->video);
-
-        return $post_video_data;
     }
     /**
      * ф-я для видалення запису

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Resources\PostResource;
+use App\Http\Resources\HomeResource;
 class PostsController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return Post::all();
+        return HomeResource::collection(Post::paginate(3));
     }
 
     /**

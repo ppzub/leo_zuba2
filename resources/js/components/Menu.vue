@@ -1,9 +1,9 @@
 <template>
 <div class="row">
   <div class="col-sm-12">
-    <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light">
+      <div class="navbar-collapse" >
+          <ul class="navbar-nav">
             <li class="nav-item">
               <router-link :to="{name: 'home'}" class="nav-link">Home</router-link>
             </li>
@@ -22,7 +22,7 @@
           </ul>
 
         </div>
-        <span v-if="$auth.check()" class="navbar-text text-white">Привіт {{$auth.user().name}}!!!</span>
+        <span v-if="$auth.check()" class="navbar-text text-dark">Привіт {{$auth.user().name}}!!!&nbsp;&nbsp;</span>
         <ul class="navbar-nav mr-auto">
             <!--LOGOUT-->
             <li v-if="$auth.check()" class="nav-item">
