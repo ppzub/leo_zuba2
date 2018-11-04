@@ -1,16 +1,36 @@
 <template>
-    <div class="container">
+<div class="row">
+    <div class="col-sm-12">
         <div class="card card-default">
             <div class="card-header">TESTING</div>
 
             <div class="card-body">
-                <p>
-                    American  Main Barbary Coast scuttle hardtack spanker fire ship grapple jack code  of conduct port. Port red ensign Shiver me timbers provost salmagundi  bring a spring upon her cable pillage cog crow's nest lateen sail.  Barbary Coast quarterdeck lass coffer keel hulk mizzen me square-rigged  loot.
-                </p>
-                <p>
-                    Yardarm starboard keelhaul list schooner prow booty cackle  fruit gabion topmast. Plunder shrouds Nelsons folly jack Arr parley warp  grog blossom ballast pressgang. Knave crack Jennys tea cup flogging log  man-of-war hearties killick long clothes six pounders hulk.
-                </p>
+                  <div v-for="post in posts">
+                    {{ post.title }}<br>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </template>
+<script>
+
+  export default {
+    data() {
+      return {
+        posts: []
+      }
+    },
+    mounted() {
+            var app = this;
+            axios.get('/posts')
+                .then(function (resp) {
+                    app.posts = resp.data;
+                })
+                .catch(function (resp) {
+                    console.log(resp);
+                    alert("Could not load posts");
+                });
+        }
+  }
+</script>

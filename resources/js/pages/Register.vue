@@ -1,5 +1,6 @@
 <template>
-    <div class="container">
+<div class="row">
+    <div class="col-sm-12">
         <div class="card card-default">
             <div class="card-header">Register page</div>
 
@@ -39,6 +40,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 <script>
   export default {
@@ -67,7 +69,7 @@
           },
           success: function () {
             app.success = true
-            this.$router.push({name: 'login', params: {successRegistrationRedirect: true}})
+            this.$router.push({name: 'home', params: {successRegistrationRedirect: true}})
           },
           error: function (res) {
             console.log(res.response.data.errors)

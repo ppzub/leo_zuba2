@@ -1,13 +1,14 @@
 <template>
-    <div class="container">
+<div class="row">
+    <div class="col-sm-12">
         <div class="card card-default">
             <div class="card-header">Login page</div>
 
             <div class="card-body">
-                <div class="alert alert-danger" v-if="has_error">
+                <div class="alert alert-danger" v-if="has_error && !success">
                     <p>Помилка, не вдається з'єднатися з цими обліковими даними.</p>
                 </div>
-                <form autocomplete="off" @submit.prevent="login" method="post">
+                <form autocomplete="off" @submit.prevent="login" v-if="!success" method="post">
 
                     <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.email }">
                         <label for="email">E-mail</label>
@@ -25,6 +26,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -33,7 +35,10 @@
       return {
         email: null,
         password: null,
-        has_error: false
+        has_error: false,
+        error: '',
+        errors: {},
+        success: false
       }
     },
 
@@ -52,8 +57,11 @@
           success: function() {
             this.$router.push({name: 'dashboard'})
           },
-          error: function() {
+          error: function (res) {
+            console.log(res.response.data.errors)
             app.has_error = true
+            app.error = res.response.data.error
+            app.errors = res.response.data.errors || {}
           },
           rememberMe: true,
           fetchUser: true

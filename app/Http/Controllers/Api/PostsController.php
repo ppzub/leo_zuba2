@@ -36,7 +36,22 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $post = Post::create($request->all());
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'user_id' => 'required',
+            'image' => 'nullable',
+            'video' => 'nullable|string',
+        ]);
+        $data = $request->all();
+        $post = new Post;
+
+        if ($data['image'])
+        {
+            $data['image'] = $post->uploadMainImage($data['image']);
+        }
+        $post->fill($data);
+        $post->save();
         return $post;
     }
 
