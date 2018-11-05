@@ -17,8 +17,8 @@ class HomeResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'content' => mb_substr($this->content, 0, 700),
-            'image' => $this->getImage()->small,
+            'content' => mb_substr($this->content, 0, 1000) . '...',
+            'image' => $this->getImage()->medium,
             'author' => $this->user->name,
             'date' => $this->getDate()
         ];

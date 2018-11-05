@@ -1,16 +1,23 @@
 <template>
 <div class="row">
     <div class="col-sm-12">
-        <div class="card card-default">
-            <div class="card-header">TESTING</div>
 
-            <div class="card-body">
-                  <div v-for="post in posts">
-                    {{ post.title }}<br>
+        <div v-for="post in posts" class="card shadow p-3 mb-5 bg-white rounded">
+          <h5 class="card-header">{{ post.title }}</h5>
+          <div class="card-body">
+            <span class="font-italic">{{ post.date }}</span>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img :src="post.image" class="img-fluid rounded">
                 </div>
-                <pagination v-if="pagination.last_page > 1" :pagination="pagination" :offset="5" @paginate="fetchPosts()"></pagination>
+                <div class="col-sm-8">
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
             </div>
+            <div class="float-right"><router-link :to="{ name: 'postshow', params: { id: post.id }}">Читати далі</router-link></div>
+          </div>
         </div>
+        <pagination v-if="pagination.last_page > 1" :pagination="pagination" :offset="5" @paginate="fetchPosts()"></pagination>
     </div>
 </div>
 </template>

@@ -16,7 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return HomeResource::collection(Post::paginate(3));
+        return HomeResource::collection(Post::orderBy('id', 'desc')->paginate(3));
     }
 
     /**
@@ -64,7 +64,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        return Post::findOrFail($id);
+        return new PostResource(Post::findOrFail($id));
     }
 
     /**

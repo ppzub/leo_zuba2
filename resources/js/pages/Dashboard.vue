@@ -1,12 +1,13 @@
 <template>
   <div class="row">
     <div class="col-sm-12">
-        <div class="card card-default">
-            <div class="card-header">Dashboard</div>
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+          <h5 class="card-header">Адмінка</h5>
+          <div class="card-body">
+must be table
 
-            <div class="card-body">
 
-            </div>
+          </div>
         </div>
     </div>
   </div>

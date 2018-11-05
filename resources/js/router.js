@@ -5,8 +5,10 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+
 import PostCreate from './posts/Create'
 import PostEdit from './posts/Edit'
+import PostShow from './posts/Show'
 
 // Routes
 const routes = [
@@ -14,6 +16,14 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
+    meta: {
+      auth: undefined
+    }
+  },
+  {
+    path: '/posts/:id',
+    name: 'postshow',
+    component: PostShow,
     meta: {
       auth: undefined
     }
@@ -34,6 +44,7 @@ const routes = [
       auth: false
     }
   },
+
   // USER ROUTES
   {
     path: '/dashboard',

@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'image' => $this->getImage()->medium,
-            'video_id' => $this->video,
+            'video' => 'https://www.youtube.com/embed/' . $this->video,
             'author' => $this->user->name,
             'date' => $this->getDate()
         ];

@@ -24,6 +24,6 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::apiResource('/posts', 'Api\PostsController');
+Route::resource('/posts', 'Api\PostsController');
 Route::post('/posts/{id}/like', 'Api\PostsController@makeLike');
 Route::delete('/posts/{id}/like', 'Api\PostsController@deleteLike');

@@ -1,50 +1,56 @@
 <template>
 <div class="row">
     <div class="col-sm-12">
-        <div class="card card-default">
-            <div class="card-header">Let's create new post</div>
+
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+            <h5 class="card-header">Let's create new post</h5>
 
             <div class="card-body">
-              <form @submit.prevent="saveForm()" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Title</label>
-                            <input type="text" v-model="post.title" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Content</label>
-                            <textarea v-model="post.content" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Image</label>
-                            <input type="file" @change="onImageChange" accept="image/*">
-                        </div>
-                        <div class="col-xs-12 form-group" v-if="post.image.length > 0">
-                            <img class="preview" :src="post.image">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">YouTube Video Link</label>
-                            <input type="text" v-model="post.video" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <button type="submit" class="btn btn-success">Create</button>
-                        </div>
-                    </div>
-                </form>
+                <div class="row">
+                  <div class="col-sm-12 col-md-10 col-lg-8">
+                      <form @submit.prevent="saveForm()" enctype="multipart/form-data">
 
+                                <div class="form-group">
+                                    <label class="control-label">Title</label>
+                                    <input type="text" v-model="post.title" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Content</label>
+                                    <wysiwyg v-model="post.content" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Image</label>
+                                    <input type="file" @change="onImageChange" accept="image/*">
+                                </div>
+                                <div class="form-group" v-if="post.image.length > 0">
+                                    <img class="preview" :src="post.image">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">YouTube Video ID: https://www.youtube.com/watch?v=<span class="badge badge-dark">SzscDBsQpis</span></label>
+                                    <input type="text" v-model="post.video" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-dark">Create</button>
+                                </div>
+
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 </template>
+
+<style>
+    img.preview {
+        width: 200px;
+        background-color: white;
+        border: 1px solid #DDD;
+        padding: 5px;
+    }
+</style>
 
 <script>
 
@@ -97,11 +103,3 @@
 
 
 </script>
-<style>
-img.preview {
-    width: 200px;
-    background-color: white;
-    border: 1px solid #DDD;
-    padding: 5px;
-}
-</style>
