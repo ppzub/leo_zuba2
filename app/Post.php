@@ -27,7 +27,7 @@ class Post extends Model
     }
     public function uploadMainImage($image)
     {
-        if ($image == null) { return; }
+        if (strlen($image) == 0) { return; }
         $this->removeImage(); // якщо вже є в БД картінка для даного запису, видаляєм
 
         $obj = new \stdClass;
@@ -94,11 +94,8 @@ class Post extends Model
         $date = Date::parse($this->created_at)->format('d F Y');
         return $date;
     }
-    /**
-     * формат дати для запису в БД
-     */
-    public function getCarbonDate()
+    public static function isJSON($string)
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('Y-m-d');
+        return is_string($string) && is_array(json_decode($string, true)) && (json_last_error() == JSON_ERROR_NONE) ? true : false;
     }
 }

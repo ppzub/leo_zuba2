@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\HomeResource;
+use App\Http\Resources\EditPostResource;
+
 class PostsController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return HomeResource::collection(Post::orderBy('id', 'desc')->paginate(3));
+        return HomeResource::collection(Post::orderBy('id', 'desc')->paginate(5));
     }
 
     /**
@@ -47,7 +49,7 @@ class PostsController extends Controller
         $data = $request->all();
         $post = new Post;
 
-        if ($data['image'])
+        if (strlen($data['image']) != 0)
         {
             $data['image'] = $post->uploadMainImage($data['image']);
         }
@@ -64,6 +66,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
+        if ($id == 'create') {return;}
         return new PostResource(Post::findOrFail($id));
     }
 
@@ -75,7 +78,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return new EditPostResource(Post::findOrFail($id));
     }
 
     /**
@@ -87,9 +90,27 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
-        $post->update($request->all());
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'image' => 'nullable',
+            'video' => 'nullable|string',
+        ]);
 
+        $post = Post::findOrFail($id);
+        $data = [
+            'title' => $request->get('title'),
+            'content' => $request->get('content'),
+            'image' => $request->get('image'),
+            'video' => $request->get('video')
+        ];
+
+        if (!Post::isJSON($data['image']))
+        {
+            $data['image'] = $post->uploadMainImage($data['image']);
+        }
+        $post->fill($data);
+        $post->save();
         return $post;
     }
 
@@ -102,7 +123,7 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        $post->delete();
+        $post->remove();
         return '';
     }
     public function makeLike( $postId )

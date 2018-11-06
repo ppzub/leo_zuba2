@@ -55,7 +55,7 @@ const routes = [
     }
   },
   {
-    path: '/posts/create',
+    path: '/create/post',
     name: 'postcreate',
     component: PostCreate,
     meta: {

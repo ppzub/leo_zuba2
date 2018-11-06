@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Content</label>
-                                    <wysiwyg v-model="post.content" />
+                                    <wysiwyg  v-model="post.content" />
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Image</label>
@@ -26,7 +26,7 @@
                                     <img class="preview" :src="post.image">
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">YouTube Video ID: https://www.youtube.com/watch?v=<span class="badge badge-dark">SzscDBsQpis</span></label>
+                                    <label class="control-label">YouTube Video ID: https://www.youtube.com/watch?v=<span class="badge badge-dark">ThisIsYouId</span></label>
                                     <input type="text" v-model="post.video" class="form-control">
                                 </div>
                                 <div class="form-group">
@@ -86,9 +86,8 @@
 
             },
             saveForm() {
-                var app = this;
-                var newPost = app.post;
-
+                let app = this;
+                let newPost = app.post;
                 axios.post('/posts', newPost)
                     .then(function (resp) {
                         app.$router.push({name: 'dashboard'});

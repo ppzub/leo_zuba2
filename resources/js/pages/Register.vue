@@ -62,7 +62,7 @@
 
     methods: {
       register() {
-        var app = this
+        let app = this
         this.$auth.register({
           data: {
             name: app.username,

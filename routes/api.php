@@ -18,12 +18,17 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', 'AuthController@login');
     Route::get('/refresh', 'AuthController@refresh');
 
+
     Route::group(['middleware' => 'auth:api'], function(){
+    	Route::get('/dashboard', 'Api\UserController@posts');
         Route::get('/user', 'AuthController@user');
         Route::post('/logout', 'AuthController@logout');
     });
 });
 
-Route::resource('/posts', 'Api\PostsController');
+Route::apiResource('/posts', 'Api\PostsController');
 Route::post('/posts/{id}/like', 'Api\PostsController@makeLike');
 Route::delete('/posts/{id}/like', 'Api\PostsController@deleteLike');
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('/posts/edit/{id}', 'Api\PostsController@edit');
+});

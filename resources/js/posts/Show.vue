@@ -3,21 +3,21 @@
     <div class="col-sm-12">
 
         <div class="card shadow p-3 mb-5 bg-white rounded">
-          <h5 v-if="post" class="card-header">{{ post.title }}</h5>
+          <h5 v-if="item" class="card-header">{{ item.title }}</h5>
           <div class="card-body">
 
             <div class="my-margin-bottom">
-                <img v-if="post" :src="post.image" class="img-fluid rounded float-left my-margin">
+                <img v-if="item" :src="item.image" class="img-fluid rounded float-left my-margin">
                 <div>
-                    <div v-if="post" class="font-italic text-right">{{ post.date }}</div>
-                    <p v-if="post" class="card-text">{{ post.content }}</p>
+                    <div v-if="item" class="font-italic text-right">{{ item.date }}</div>
+                    <p v-if="item" class="card-text" v-html="item.content"></p>
                 </div>
             </div>
             <div class="embed-responsive embed-responsive-16by9 my-margin-bottom">
-                <iframe v-if="post" class="embed-responsive-item" :src="post.video" allowfullscreen></iframe>
+                <iframe v-if="item" class="embed-responsive-item" :src="item.video" allowfullscreen></iframe>
             </div>
             <div>
-                <div v-if="post" class="font-italic font-weight-bold text-right">Автор статті: {{ post.author }}</div>
+                <div v-if="item" class="font-italic font-weight-bold text-right">Автор статті: {{ item.author }}</div>
             </div>
           </div>
         </div>
@@ -38,15 +38,15 @@
   export default {
     data() {
       return {
-        post: {}
+        item: {}
       }
     },
 
     mounted() {
-        var app = this;
+        let app = this;
         axios.get('/posts/' + app.$route.params.id)
             .then(function (resp) {
-                app.post = resp.data.data;
+                app.item = resp.data.data;
             })
             .catch(function (resp) {
                 console.log(resp);

@@ -56,11 +56,11 @@
           user: [
             {
               name: 'Адмін-панель',
-              path: 'dashboard'
+              path: 'dashboard',
             },
             {
               name: 'Створити новий пост',
-              path: 'postcreate'
+              path: 'postcreate',
             }
           ],
         }

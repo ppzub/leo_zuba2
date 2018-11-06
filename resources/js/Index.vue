@@ -2,7 +2,7 @@
   <div class="container">
         <div id="main">
             <header id="header">
-                <h1 class="text-center">
+                <h1 class="text-center my-margin-top">
 
                         Блог Single-page Application
 
@@ -17,6 +17,11 @@
   </div>
 </template>
 
+<style>
+  .my-margin-top {
+    margin-top: 30px;
+  }
+</style>
 <script>
   import navigationMenu from './components/Menu.vue'
 
