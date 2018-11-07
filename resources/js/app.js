@@ -7,7 +7,7 @@ import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router'
 import wysiwyg from "vue-wysiwyg";
 import Index from './Index'
-import Pagination from './components/Pagination.vue'
+import Pagination from './components/Pagination'
 import auth from './auth'
 import router from './router'
 import store from './store'

@@ -19,7 +19,7 @@
             <div>
                 <div v-if="item" class="font-italic font-weight-bold text-right">Автор статті: {{ item.author }}</div>
             </div>
-
+            <comments></comments>
           </div>
         </div>
     </div>
@@ -37,15 +37,16 @@
 </style>
 <script>
 
-  import ToggleLike from '../components/ToggleLike.vue';
-
+  import ToggleLike from '../components/ToggleLike';
+  import Comments from '../components/Comments';
   export default {
 
     /*
       Defines the components used by the page.
     */
     components: {
-      'toggle-like': ToggleLike
+      'toggle-like': ToggleLike,
+      'comments': Comments
     },
     /*
       When created, load the post based on the ID in the

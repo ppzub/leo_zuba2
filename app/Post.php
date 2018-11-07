@@ -8,19 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Request;
+use BrianFaust\Commentable\Traits\HasComments;
 
 class Post extends Model
 {
+    use HasComments;
 
 	protected $fillable = ['title', 'content', 'user_id', 'image', 'video', 'created_at', 'updated_at'];
 
 	public function user()
     {
     	return $this->belongsTo('App\User', 'user_id');
-    }
-    public function comments()
-    {
-        return $this->hasMany('App\Comment');
     }
     public function likes()
     {

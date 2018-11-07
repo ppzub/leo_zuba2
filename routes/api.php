@@ -28,9 +28,10 @@ Route::prefix('auth')->group(function () {
 
 Route::apiResource('/posts', 'Api\PostsController');
 
-Route::post('/like/post/{id}', 'Api\PostsController@makeLike');
-Route::delete('/like/post/{id}/', 'Api\PostsController@deleteLike');
-
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/posts/edit/{id}', 'Api\PostsController@edit');
+    Route::post('/like/post/{id}', 'Api\PostsController@makeLike');
+	Route::delete('/like/post/{id}/', 'Api\PostsController@deleteLike');
+
 });
+	Route::apiResource('/post/{id}/comments', 'Api\CommentsController');
