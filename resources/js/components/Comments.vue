@@ -35,9 +35,6 @@
     },
 
 
-  /*created() {
-      this.fetchComments();
-  },*/
   mounted() {
     this.fetchComments();
   },
