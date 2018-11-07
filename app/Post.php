@@ -7,6 +7,7 @@ use Jenssegers\Date\Date;
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Request;
 
 class Post extends Model
 {
@@ -24,6 +25,11 @@ class Post extends Model
     public function likes()
     {
         return $this->belongsToMany( 'App\User', 'users_posts_likes', 'post_id', 'user_id');
+    }
+    public function userLike()
+    {
+        $userID = Request::user('api') != '' ? Request::user('api')->id : null;
+        return $this->belongsToMany( 'App\User', 'users_posts_likes', 'post_id', 'user_id')->where('user_id', $userID);
     }
     public function uploadMainImage($image)
     {
@@ -62,6 +68,9 @@ class Post extends Model
     public function remove()
     {
         $this->removeImage();
+        if($this->likes()) {
+            $this->likes()->detach($this->id);
+        }
         $this->delete();
     }
     /**

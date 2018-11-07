@@ -65,7 +65,7 @@
     },
   methods: {
               deletePost(id, index) {
-                  if (confirm("Do you really want to delete it?")) {
+                  if (confirm("Дійсно видалити цей пост?")) {
                       var app = this;
                       axios.delete('/posts/' + id)
                           .then(function (resp) {

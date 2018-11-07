@@ -22,12 +22,14 @@
                                     <label class="control-label">Image</label>
                                     <input type="file" @change="onImageChange" accept="image/*">
                                 </div>
+
+                                <div class="form-group" v-if="!isJson(sendpost.image)">
+                                    <img class="preview" :src="sendpost.image" width="120px">
+                                </div>
                                 <div class="form-group" v-if="sendpost.image_src.length > 0">
                                     <img class="preview" :src="sendpost.image_src">
                                 </div>
-                                <div class="form-group" v-if="!isJson(sendpost.image)">
-                                    <img class="preview" :src="sendpost.image" width="200px">
-                                </div>
+
                                 <div class="form-group">
                                     <label class="control-label">YouTube Video ID: https://www.youtube.com/watch?v=<span class="badge badge-dark">ThisIsYouId</span></label>
                                     <input type="text" v-model="sendpost.video" class="form-control">
@@ -48,6 +50,15 @@
 </div>
 
 </template>
+
+<style>
+    img.preview {
+        width: 200px;
+        background-color: white;
+        border: 1px solid #DDD;
+        padding: 5px;
+    }
+</style>
 
 <script>
 

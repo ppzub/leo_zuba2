@@ -20,7 +20,8 @@ class HomeResource extends JsonResource
             'content' => mb_substr($this->content, 0, 1000) . '...',
             'image' => $this->getImage()->medium,
             'author' => $this->user->name,
-            'date' => $this->getDate()
+            'date' => $this->getDate(),
+            'user_like_count' => $this->userLike->count()
         ];
     }
 }

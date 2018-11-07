@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\HomeResource;
 use App\Http\Resources\EditPostResource;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -66,7 +67,6 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        if ($id == 'create') {return;}
         return new PostResource(Post::findOrFail($id));
     }
 
@@ -126,11 +126,17 @@ class PostsController extends Controller
         $post->remove();
         return '';
     }
-    public function makeLike( $postId )
+    public function makeLike($postId)
     {
         $post = Post::findOrFail($postId);
 
-        if( !$post->likes->contains(Auth::user()->id)) {
+        if($post->likes == null) {
+            $post->likes()->attach(Auth::user()->id, [
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s')
+          ]);
+        }
+        elseif(!$post->likes->contains('user_id', Auth::user()->id)) {
             $post->likes()->attach(Auth::user()->id, [
                 'created_at'    => date('Y-m-d H:i:s'),
                 'updated_at'    => date('Y-m-d H:i:s')
@@ -139,7 +145,7 @@ class PostsController extends Controller
 
         return response()->json( ['post_liked' => true], 201 );
     }
-    public function deleteLike( $postId )
+    public function deleteLike($postId)
     {
         $post = Post::findOrFail($postId);
         $post->likes()->detach(Auth::user()->id);
