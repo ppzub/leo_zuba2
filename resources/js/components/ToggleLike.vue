@@ -1,20 +1,26 @@
 
-<template>
-  <span class="toggle-like">
-    <span class="like" v-on:click="likePost( item.id )" v-if="!liked && postLoadStatus == 2 && postLikeActionStatus != 1 && postUnlikeActionStatus != 1">
-      	Like
+<template >
+  <div class="my-margin-bottom">
+    <span v-on:click="likePost( item.id )" v-if="!liked && postLoadStatus == 2 && postLikeActionStatus != 1 && postUnlikeActionStatus != 1">
+      	<i class="fas fa-thumbs-up my-cursor"></i>
     </span>
-    <span class="un-like" v-on:click="unlikePost( item.id )" v-if="liked && postLoadStatus == 2 && postLikeActionStatus != 1 && postUnlikeActionStatus != 1">
-  		Un-like
+    <span v-on:click="unlikePost( item.id )" v-if="liked && postLoadStatus == 2 && postLikeActionStatus != 1 && postUnlikeActionStatus != 1">
+  		<i class="fas fa-thumbs-down my-cursor" alt="Unlike"></i>
 	</span>
-	<span class="like-count">
-      {{ item.likes_count }} likes
+	<span>
+      &nbsp;{{ item.likes_count }} &nbsp;likes
 	</span>
-  </span>
+  </div>
 </template>
 
 <style>
-
+  .my-cursor {
+    cursor: pointer;
+    font-size: 2rem;
+  }
+  .my-margin-bottom {
+    margin-bottom: 10px;
+  }
 </style>
 
 <script>

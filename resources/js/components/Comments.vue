@@ -1,29 +1,45 @@
 <template>
   <div>
-    <div v-if="$auth.check()">
-      <h4>Add Comment</h4>
-      <form @submit.prevent="edit ? editComment(comment.id) : createComment()">
-        <div class="input-group">
-          <textarea name="body" v-model="comment.body" ref="textarea"  class="form-control"></textarea>
-        </div>
-          <div class="input-group">
-            <button type="submit" class="btn btn-dark" v-show="!edit">Add Comment</button>
-            <button type="submit" class="btn btn-dark" v-show="edit">Edit Comment</button>
+    <div class="row" v-if="$auth.check()">
+      <div class="col-sm-6">
+        <h4>Залиште коментар</h4>
+        <form @submit.prevent="edit ? editComment(comment.id) : createComment()">
+          <div class="form-group">
+            <textarea name="body" v-model="comment.body" ref="textarea"  class="form-control"></textarea>
           </div>
-      </form>
+            <div class="form-group">
+              <button type="submit" class="btn btn-dark" v-show="!edit">Коментувати</button>
+              <button type="submit" class="btn btn-dark" v-show="edit">Редагувати</button>
+            </div>
+        </form>
+      </div>
     </div>
-    <h4>Comments</h4>
-      <ul class="list-group">
-        <li class="list-group-item" v-for="(comment, index) in comments">
-          {{comment.body}}
-          <span v-if="$auth.user().id == user_id[index]">
-            <a class="btn btn-primary" v-on:click=" showComment(comment.id)">Edit</a>
-            <a class="btn btn-danger" v-on:click=" deleteComment(comment.id)">Delete</a>
-          </span>
-        </li>
-      </ul>
+    <div class="row">
+      <div class="col-sm-8">
+        <h4>Коментарі:</h4>
+        <ul class="list-group">
+          <li class="list-group-item" v-for="(comment, index) in comments">
+            <span class="font-italic">{{users[index].name}}:</span><br>
+            {{comment.body}}
+            <span v-if="$auth.user().id == users[index].id" class="float-right">
+              <a href="#" v-on:click.prevent=" showComment(comment.id)"><i class="fas fa-highlighter my-font-size my-margin-left"></i></i></a>
+              <a href="#" v-on:click.prevent=" deleteComment(comment.id)"><i class="fas fa-times my-font-size my-margin-left"></i></a>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
+
+<style>
+  .my-font-size {
+    font-size: 2rem;
+  }
+  .my-margin-left {
+    margin-left: 10px;
+  }
+</style>
 
 <script>
   export default{
@@ -31,7 +47,7 @@
       return {
         main: [],
         edit:false,
-        user_id: [],
+        users: [],
         comments:[],
         comment: {
           id:'',
@@ -53,9 +69,10 @@
         .then(function (response){
           c.main = response.data.data;
           c.comments = [];
+          c.users = [];
           for (var i = 0; i < c.main.length; i++) {
               c.comments.push({id: c.main[i].id, body: c.main[i].body});
-              c.user_id[i] = c.main[i].user_id;
+              c.users.push({id: c.main[i].user_id, name: c.main[i].user_name});
             }
       });
     },
