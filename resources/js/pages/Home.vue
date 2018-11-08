@@ -26,7 +26,7 @@
   export default {
     data() {
       return {
-        posts: {},
+        posts: [],
         pagination: {'current_page': 1}
       }
     },

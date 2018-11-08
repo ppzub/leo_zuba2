@@ -32,6 +32,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/posts/edit/{id}', 'Api\PostsController@edit');
     Route::post('/like/post/{id}', 'Api\PostsController@makeLike');
 	Route::delete('/like/post/{id}/', 'Api\PostsController@deleteLike');
-
+    Route::apiResource('/post/{id}/comments', 'Api\CommentsController');
 });
-	Route::apiResource('/post/{id}/comments', 'Api\CommentsController');
+Route::get('/post/{id}/comments', 'Api\CommentsController@index');

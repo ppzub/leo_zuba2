@@ -1,6 +1,4 @@
-<style>
 
-</style>
 <template>
   <span class="toggle-like">
     <span class="like" v-on:click="likePost( item.id )" v-if="!liked && postLoadStatus == 2 && postLikeActionStatus != 1 && postUnlikeActionStatus != 1">
@@ -14,6 +12,11 @@
 	</span>
   </span>
 </template>
+
+<style>
+
+</style>
+
 <script>
   export default {
 

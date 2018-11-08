@@ -66,7 +66,6 @@
 
         data() {
             return {
-                //epost: {},
                 sendpost: {
                     title: '',
                     content: '',

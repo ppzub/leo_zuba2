@@ -16,7 +16,8 @@ class CommentsResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'body' => $this->body
+            'body' => $this->body,
+            'user_id' => $this->creator_id
         ];
     }
 }

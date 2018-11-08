@@ -30,7 +30,7 @@ Vue.use(VueAuth, auth)
 Vue.use(wysiwyg, {hideModules: { "image": true }});
 // Load Index
 Vue.component('index', Index)
-Vue.component('pagination', Pagination);
+Vue.component('pagination', Pagination)
 
 const app = new Vue({
   el: '#app',
