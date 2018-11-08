@@ -1,18 +1,17 @@
 <template>
     <nav role="navigation" aria-label="pagination">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" @click.prevent="changePage(pagination.current_page - 1)" :disabled="pagination.current_page <= 1" tabindex="-1">Previous</a>
-        </li>
-        <li v-for="page in pages" class="page-item">
-            <a class="page-link" :class="isCurrentPage(page) ? 'is-current' : ''" @click.prevent="changePage(page)">{{ page }}</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" @click.prevent="changePage(pagination.current_page + 1)" :disabled="pagination.current_page >= pagination.last_page">Next</a>
-        </li>
-      </ul>
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" @click.prevent="changePage(pagination.current_page - 1)" :disabled="pagination.current_page <= 1" tabindex="-1">Previous</a>
+            </li>
+            <li v-for="page in pages" class="page-item">
+                <a class="page-link" :class="isCurrentPage(page) ? 'is-current' : ''" @click.prevent="changePage(page)">{{ page }}</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" @click.prevent="changePage(pagination.current_page + 1)" :disabled="pagination.current_page >= pagination.last_page">Next</a>
+            </li>
+        </ul>
     </nav>
-
 </template>
 
 <script>

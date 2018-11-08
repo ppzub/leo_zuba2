@@ -23,16 +23,6 @@ class PostsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -132,18 +122,18 @@ class PostsController extends Controller
 
         if($post->likes == null) {
             $post->likes()->attach(Auth::user()->id, [
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s')
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
           ]);
         }
         elseif(!$post->likes->contains('user_id', Auth::user()->id)) {
             $post->likes()->attach(Auth::user()->id, [
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s')
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
           ]);
         }
 
-        return response()->json( ['post_liked' => true], 201 );
+        return response()->json(['post_liked' => true], 201 );
     }
     public function deleteLike($postId)
     {

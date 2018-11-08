@@ -1,15 +1,12 @@
 <template>
 <div class="row">
     <div class="col-sm-12">
-
         <div class="card shadow p-3 mb-5 bg-white rounded">
             <h5 class="card-header">Let's create new post</h5>
-
             <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-12 col-md-10 col-lg-8">
-                      <form @submit.prevent="saveForm()" enctype="multipart/form-data">
-
+                    <div class="col-sm-12 col-md-10 col-lg-8">
+                        <form @submit.prevent="saveForm()" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label class="control-label">Title</label>
                                     <input type="text" v-model="post.title" class="form-control">
@@ -32,7 +29,6 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-dark">Create</button>
                                 </div>
-
                         </form>
                     </div>
                 </div>
@@ -99,6 +95,5 @@
             }
         }
     }
-
 
 </script>

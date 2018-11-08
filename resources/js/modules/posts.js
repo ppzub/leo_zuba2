@@ -23,12 +23,12 @@
 			commit( 'setPostsLoadStatus', 1 );
 		    axios.get('/posts')
 		        .then( function( response ){
-		          commit( 'setPosts', response.data.data );
-		          commit( 'setPostsLoadStatus', 2 );
+		          	commit( 'setPosts', response.data.data );
+		          	commit( 'setPostsLoadStatus', 2 );
 		        })
 		        .catch( function(){
-		          commit( 'setPosts', [] );
-		          commit( 'setPostsLoadStatus', 3 );
+		          	commit( 'setPosts', [] );
+		          	commit( 'setPostsLoadStatus', 3 );
 			});
     	},
 
@@ -38,15 +38,15 @@
 
 	      	axios.get('/posts/' + data.id)
 	        .then( function( response ){
-	          commit( 'setPost', response.data.data );
+	          	commit( 'setPost', response.data.data );
 						if( response.data.data.user_like_count > 0 ){
 							commit('setPostLikedStatus', true);
 						}
 				commit( 'setPostLoadStatus', 2 );
 	        })
 	        .catch( function(){
-	          commit( 'setPost', {} );
-	          commit( 'setPostLoadStatus', 3 );
+	          	commit( 'setPost', {} );
+	          	commit( 'setPostLoadStatus', 3 );
 	        });
 	    },
 
@@ -110,18 +110,18 @@
     Defines the mutations used
   */
 	const mutations = {
-    /*
-      Sets the posts
-    */
-    setPosts( state, posts ){
-      state.posts = posts;
-	},
-    /*
-      Set the post
-    */
-    setPost( state, post ){
-      state.post = post;
-    },
+	    /*
+	      Sets the posts
+	    */
+	    setPosts( state, posts ){
+	      	state.posts = posts;
+		},
+	    /*
+	      Set the post
+	    */
+	    setPost( state, post ){
+	      	state.post = post;
+	    },
 
 		/*
 			Set the post liked status
@@ -151,12 +151,12 @@
 				}
 			}
 		},
-	setPostsLoadStatus( state, status ){
-	    state.postsLoadStatus = status;
-	},
-	setPostLoadStatus( state, status ){
-      	state.postLoadStatus = status;
-	}
+		setPostsLoadStatus( state, status ){
+		    state.postsLoadStatus = status;
+		},
+		setPostLoadStatus( state, status ){
+	      	state.postLoadStatus = status;
+		}
 	}
 
   /*
@@ -164,12 +164,12 @@
   */
 	const getters = {
 
-    getPosts( state ){
-      	return state.posts;
-	},
-    getPost( state ){
-      	return state.post;
-    },
+	    getPosts( state ){
+	      	return state.posts;
+		},
+	    getPost( state ){
+	      	return state.post;
+	    },
 		/*
 			Gets the post liked status
 		*/
@@ -190,16 +190,16 @@
 		getPostUnlikeActionStatus( state ){
 			return state.postUnlikeActionStatus;
 		},
-	getPostsLoadStatus( state ){
-      	return state.postsLoadStatus;
-	},
-	getPostLoadStatus( state ){
-      	return state.postLoadStatus;
-	}
+		getPostsLoadStatus( state ){
+	      	return state.postsLoadStatus;
+		},
+		getPostLoadStatus( state ){
+	      	return state.postLoadStatus;
+		}
 	}
 export default {
-  state,
-  getters,
-  actions,
-  mutations
+  	state,
+  	getters,
+  	actions,
+  	mutations
 }

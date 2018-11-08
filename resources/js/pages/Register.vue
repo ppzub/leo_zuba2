@@ -3,14 +3,13 @@
     <div class="col-sm-12">
         <div class="card shadow p-3 mb-5 bg-white rounded">
             <h5 class="card-header">Register page</h5>
-
             <div class="card-body">
                 <div class="alert alert-danger" v-if="has_error && !success">
                     <p v-if="error == 'registration_validation_error'">Помилки валідації, будь ласка, зверніть увагу на повідомлення:</p>
                     <p v-else>Помилка, не можливо зареєструватися на даний момент. Якщо проблема не зникне, зв'яжіться з адміністратором.</p>
                 </div>
                 <div class="row">
-                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
 
                             <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.username }">
@@ -61,27 +60,27 @@
     },
 
     methods: {
-      register() {
-        let app = this
-        this.$auth.register({
-          data: {
-            name: app.username,
-            email: app.email,
-            password: app.password,
-            password_confirmation: app.password_confirmation
-          },
-          success: function () {
-            app.success = true
-            this.$router.push({name: 'home', params: {successRegistrationRedirect: true}})
-          },
-          error: function (res) {
-            console.log(res.response.data.errors)
-            app.has_error = true
-            app.error = res.response.data.error
-            app.errors = res.response.data.errors || {}
-          }
-        })
-      }
+        register() {
+            let app = this
+            this.$auth.register({
+                data: {
+                    name: app.username,
+                    email: app.email,
+                    password: app.password,
+                    password_confirmation: app.password_confirmation
+                },
+              success: function () {
+                app.success = true
+                this.$router.push({name: 'home', params: {successRegistrationRedirect: true}})
+            },
+              error: function (res) {
+                console.log(res.response.data.errors)
+                app.has_error = true
+                app.error = res.response.data.error
+                app.errors = res.response.data.errors || {}
+                }
+            })
+        }
     }
-  }
+}
 </script>

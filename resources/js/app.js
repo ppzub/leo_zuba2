@@ -33,7 +33,7 @@ Vue.component('index', Index)
 Vue.component('pagination', Pagination)
 
 const app = new Vue({
-  el: '#app',
-  router,
-  store
+	el: '#app',
+	router,
+	store
 });
